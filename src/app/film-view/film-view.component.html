@@ -1,0 +1,12 @@
+<div class="col-xs-12">
+    <h2>Mes films</h2>
+    <ul class="list-group">
+      <app-film *ngFor="let film of films; let i = index" 
+        [filmName]="film.filmName" 
+        [actorList]="film.actorList" 
+        [srcImg]="film.srcImg"
+        [indexOfFilm]="i"
+        [id]="film.id">
+      </app-film>
+    </ul>
+  </div>

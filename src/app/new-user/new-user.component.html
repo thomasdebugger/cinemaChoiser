@@ -1,0 +1,36 @@
+<div class="col-sm-8 col-sm-offset-2">
+    <form [formGroup] = "userForm" (ngSubmit)="onSubmitForm()">
+        <div class="form-group">
+            <label for="firsttName"> Prénom </label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" >
+            <label for="lastName"> Nom </label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" >
+            <label for="pseudo"> pseudo </label>
+            <input type="text" class="form-control" id="pseudo" formControlName="pseudo" >
+            <label for="email"> email </label>
+            <input type="text" class="form-control" id="email" formControlName="email" >
+            <div formArrayName="filmCategoryPreference">
+                <h4>film Category Preference</h4>
+                <div class="form-group" *ngFor="let filmCategoryPreferenceControl of getFilmCategoryPreference().controls; let i = index">
+                    <input type="text" class="form-control" [formControlName]="i">
+                </div>
+                <button type="button" class="btn btn-success" (click)="onAddFilmCategoryPreference()"> Ajouter un FilmCategoryPreference</button>
+            </div>
+            <div formArrayName="filmPreference">
+                <h4>film Category Preference</h4>
+                <div class="form-group" *ngFor="let filmPreferenceControl of getFilmPreference().controls; let i = index">
+                    <input type="text" class="form-control" [formControlName]="i">
+                </div>
+                <button type="button" class="btn btn-success" (click)="onAddFilmPreference()"> Ajouter un filmPreference</button>
+            </div>
+            <div formArrayName="actorPreference">
+                <h4>film Category Preference</h4>
+                <div class="form-group" *ngFor="let actorPreferenceControl of getActorPreference().controls; let i = index">
+                    <input type="text" class="form-control" [formControlName]="i">
+                </div>
+                <button type="button" class="btn btn-success" (click)="onAddActorPreference()"> Ajouter un actorPreference</button>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid"> soumettre </button>
+    </form>
+</div>

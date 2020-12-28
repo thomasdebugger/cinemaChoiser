@@ -1,0 +1,18 @@
+<a class="nav-item nav-link" routerLink="/new-user"> New User</a>
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let user of users">
+        <h3> {{ user.pseudo }} </h3>
+        <h3> {{ user.lastName }} {{ user.firstName }} </h3>
+        <p> {{ user.email}} </p>
+        <p *ngIf="user.filmCategoryPreference && user.filmCategoryPreference.length>0">
+            <span *ngFor="let category of user.filmCategoryPreference"> {{ category }}</span>
+        </p>
+        <p *ngIf="user.filmPreference && user.filmPreference.length>0">
+            <span *ngFor="let film of user.filmPreference"> films : {{ film }}</span>
+        </p>
+        <p *ngIf="user.actorPreference && user.actorPreference.length>0">
+            <span *ngFor="let actor of user.actorPreference"> actor : {{ actor }}</span>
+        </p>
+
+    </li>
+</ul>

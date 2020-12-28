@@ -1,29 +1,17 @@
 import { Subject } from "rxjs";
+import { HttpClient} from '@angular/common/http';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class FilmSevice{
+
+  constructor(private httpClient : HttpClient){
+
+  }
 
   filmSubject = new Subject<any[]>();
 
-  private films =[
-        {
-          id: 1,
-          filmName : "Loup de wall street",
-          actorList :"Leonardo Di Caprio",
-          srcImg : "https://cutt.ly/Vh8v578"
-        },
-        {
-          id: 2,
-          filmName:"Interstellar",
-          actorList:"Matthew McConaughey",
-          srcImg : "https://cutt.ly/Wh8btfb"
-        },
-        {
-          id: 3,
-          filmName:"Joker",
-          actorList:"Joaquin Phoenix",
-          srcImg : "https://cutt.ly/Qh8byQe"
-        }
-      ];
+  private films = [];
 
   emitFilmSubject(){
     this.filmSubject.next(this.films.slice());
@@ -54,6 +42,29 @@ export class FilmSevice{
     this.films.push(film);
     this.emitFilmSubject(); 
 
+  }
+
+  saveFilmOnServer(){
+    this.httpClient.put('https://cinema-56d52-default-rtdb.firebaseio.com/films.json', this.films).subscribe(
+      ()=>{
+        console.log('enregistrement terminé');
+      },
+      (erreur) => {
+        console.log('erreur de sauvagarde : ', erreur)
+      }
+    );
+  }
+
+  getFilmFromServer(){
+    this.httpClient.get<any[]>('https://cinema-56d52-default-rtdb.firebaseio.com/films.json').subscribe(
+      (response)=>{
+        this.films = response;
+        this.emitFilmSubject();
+      },
+      (erreur)=>{
+        console.log('erreur de chargement !', erreur);
+      }
+    );
   }
 
     

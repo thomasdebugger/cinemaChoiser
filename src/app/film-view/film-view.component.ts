@@ -24,7 +24,12 @@ export class FilmViewComponent implements OnInit {
       }
     );
     this.filmsService.emitFilmSubject();
+    this.filmsService.getFilmFromServer();
   } 
   isAuth = false;
+
+  onSave(){
+    this.filmsService.saveFilmOnServer();
+  }
 
 }

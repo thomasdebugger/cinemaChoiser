@@ -17,6 +17,7 @@ import { EditFilmComponent } from './edit-film/edit-film.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
+import { HttpClient, HttpClientModule} from '@angular/common/http';
 
 const appRoutes : Routes = [
   {path : 'films',canActivate: [AuthGuard], component: FilmViewComponent},
@@ -47,7 +48,8 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
   ],
   // exports: [RouterModule],
   providers: [

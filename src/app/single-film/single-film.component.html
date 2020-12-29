@@ -1,10 +1,12 @@
-<h2>{{ name }}</h2>
-<img/>
-<p>Realisateur  : {{ actor }}</p>
-<h2>Liste des acteurs</h2>
-<ul>
-    <li> </li>
-</ul>
-<p>Date de parution : </p>
-<h3>Teaser</h3>
-<a [routerLink]="['/films']"> Retour à la liste </a>
+<ng-container *ngIf="film$ | async as film">
+    <h2>{{ film.filmName }}</h2>
+    <img/>
+    <p>Realisateur  : {{ film.realisator }}</p>
+    <h2>Liste des acteurs</h2>
+    <ul>
+        <li> </li>
+    </ul>
+    <p>Date de parution : {{ film.release }}</p>
+    <h3>Teaser</h3>
+    <a [routerLink]="['/films']"> Retour à la liste </a>
+</ng-container>

@@ -1,9 +1,9 @@
 <li class="list-group-item">
-    <img src="{{ srcImg }}"/>
-    <p>Film : {{ filmName }}</p>
-    <p>Catégorie : {{ category }}</p>
-    <p>Réalisateur : {{ realisator }}</p>
-    <p>Acteurs : {{ actorList }}</p>
+    <img src="{{ film.srcImg }}"/>
+    <p>Film : {{ film.filmName }}</p>
+    <p>Catégorie : {{ film.filmCategory }}</p>
+    <p>Réalisateur : {{ film.realisator }}</p>
+    <p>Acteurs : {{ film.actorList }}</p>
     <p>Stars :</p>
     <a [routerLink]="[id]"> Detail</a>
 </li>

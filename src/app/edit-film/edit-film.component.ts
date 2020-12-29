@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/
 import { Router } from '@angular/router';
 import { Film } from '../models/film.model';
 import { FilmSevice } from '../services/film.service';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-edit-film',
@@ -12,12 +13,18 @@ import { FilmSevice } from '../services/film.service';
 export class EditFilmComponent implements OnInit {
 
   filmForm : FormGroup;
+  uuidValue:string;
 
   constructor( private filmService : FilmSevice, private router : Router, private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm()
 
+  }
+
+  generateUUID(){
+    this.uuidValue=UUID.UUID();
+    return this.uuidValue;
   }
 
   initForm(){
@@ -35,7 +42,9 @@ export class EditFilmComponent implements OnInit {
 
   onSubmitForm(){
     const formValue = this.filmForm.value;
+    this.generateUUID();
     const film = new Film(
+      this.uuidValue,
       formValue['filmName'],
       formValue['realisator'],
       formValue['release'],
@@ -43,9 +52,11 @@ export class EditFilmComponent implements OnInit {
       formValue['filmCategory'],
       formValue['srcImg'],
     );
-    this.filmService.addFilm(film);
-    this.filmService.saveFilmOnServer();
-    this.router.navigate(['/films']);
+
+    this.filmService.saveFilmOnServer(film).subscribe(
+      () => this.router.navigate(['/films']),
+      error => {console.error(error)}
+      );
   }
 
   getActorList(){

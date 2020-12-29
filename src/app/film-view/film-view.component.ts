@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { Film } from '../models/film.model';
 import { FilmSevice } from '../services/film.service';
 
 @Component({
@@ -9,26 +11,15 @@ import { FilmSevice } from '../services/film.service';
 })
 export class FilmViewComponent implements OnInit {
   
-  films :any[];
-  filmSubscription : Subscription;
+  filmSubscription$ : Observable<Film[]>;
   
   constructor (private filmsService : FilmSevice){
 
   }
 
   ngOnInit(){
-    this.filmSubscription = this.filmsService.filmSubject.subscribe(
-      (films :any []) =>{
-        this.films = films 
-      }
-    );
-    this.filmsService.emitFilmSubject();
-    this.filmsService.getFilmFromServer();
+    this.filmSubscription$ = this.filmsService.getFilmFromServer();
   } 
+  
   isAuth = false;
-
-  onSave(){
-    this.filmsService.saveFilmOnServer();
-  }
-
 }

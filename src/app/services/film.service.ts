@@ -1,60 +1,37 @@
-import { Subject } from "rxjs";
-import { HttpClient} from '@angular/common/http';
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Film } from "../models/film.model";
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FilmSevice{
 
   constructor(private httpClient : HttpClient){
-
   }
 
-  filmSubject = new Subject<any[]>();
+  // filmSubject = new Subject<any[]>();
 
-  private films = [];
+  // private films = [];
 
-  emitFilmSubject(){
-    this.filmSubject.next(this.films);
-  }
+  // emitFilmSubject(){
+  //   this.filmSubject.next(this.films);
+  // }
   
-  getFilmById(id: number){
-    const film = this.films.find(
-      (filmObject)=> {
-        return filmObject.id === id;
-      }
-    );
-    return film;
-
+  getFilmById(id: string): Observable<Film> {
+    return this.httpClient.get<Film>(`https://cinema-56d52-default-rtdb.firebaseio.com/films.json`).pipe(map(films => films[id]));
   }
 
-  addFilm(film : Film){
-      this.films.push(film);
-      this.emitFilmSubject();
+  // addFilm(film : Film){
+  //     this.films.push(film);
+  //     // this.emitFilmSubject();
+  // }
+
+  saveFilmOnServer(film: Film): Observable<any>{
+    return this.httpClient.post('https://cinema-56d52-default-rtdb.firebaseio.com/films.json', film);
   }
 
-  saveFilmOnServer(){
-    this.httpClient.put('https://cinema-56d52-default-rtdb.firebaseio.com/films.json', this.films).subscribe(
-      ()=>{
-        console.log('enregistrement terminé');
-      },
-      (erreur) => {
-        console.log('erreur de sauvagarde : ', erreur)
-      }
-    );
+  getFilmFromServer() : Observable<Film[]>{
+    return this.httpClient.get<Film[]>('https://cinema-56d52-default-rtdb.firebaseio.com/films.json');
   }
-
-  getFilmFromServer(){
-    this.httpClient.get<any[]>('https://cinema-56d52-default-rtdb.firebaseio.com/films.json').subscribe(
-      (response)=>{
-        this.films = response;
-        this.emitFilmSubject();
-      },
-      (erreur)=>{
-        console.log('erreur de chargement !', erreur);
-      }
-    );
-  }
-
-    
 }

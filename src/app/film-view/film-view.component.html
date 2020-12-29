@@ -1,16 +1,12 @@
 <div class="col-xs-12">
     <h2>Mes films</h2>
     <ul class="list-group">
-      <app-film *ngFor="let film of films; let i = index" 
-        [filmName]="film.filmName" 
-        [actorList]="film.actorList"
-        [category]="film.filmCategory"
-        [realisator]="film.realisator" 
-        [srcImg]="film.srcImg"
+      <ng-container *ngIf="filmSubscription$|async as filmSubscription">
+        <app-film *ngFor="let film of filmSubscription | keyvalue; let i = index" 
+        [film]="film.value"
         [indexOfFilm]="i"
-        [id]="film.id">
+        [id]="film.key">
       </app-film>
+    </ng-container>
     </ul>
-    <button class="btn button-success" (click)="onSave()">Save</button>
-
   </div>

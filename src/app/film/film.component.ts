@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Film } from '../models/film.model';
 
 @Component({
   selector: 'app-film',
@@ -9,11 +10,7 @@ export class FilmComponent implements OnInit {
 
   constructor() { }
 
-  @Input() filmName :string;
-  @Input() realisator : string;
-  @Input() actorList :string;
-  @Input() category : string;
-  @Input() srcImg : string;
+  @Input() film: Film;
   @Input() indexOfFilm : number;
   @Input() id : number;
 

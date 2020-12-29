@@ -18,6 +18,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
 import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 const appRoutes : Routes = [
   {path : 'films',canActivate: [AuthGuard], component: FilmViewComponent},
@@ -50,6 +51,7 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
+    Ng2SearchPipeModule,
   ],
   // exports: [RouterModule],
   providers: [

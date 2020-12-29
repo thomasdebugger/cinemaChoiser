@@ -1,12 +1,11 @@
 <ng-container *ngIf="film$ | async as film">
-    <h2>{{ film.filmName }}</h2>
-    <img/>
+    <img src="{{ film.srcImg }}"/>
+    <h1>{{ film.filmName }}</h1>
     <p>Realisateur  : {{ film.realisator }}</p>
-    <h2>Liste des acteurs</h2>
-    <ul>
-        <li> </li>
-    </ul>
+    <h4>Liste des acteurs</h4>
+    <p>{{film.actorList }}</p>
     <p>Date de parution : {{ film.release }}</p>
-    <h3>Teaser</h3>
+    <h4>synopsis :</h4>
+    <h4>Teaser</h4>
     <a [routerLink]="['/films']"> Retour à la liste </a>
 </ng-container>

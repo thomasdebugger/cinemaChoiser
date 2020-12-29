@@ -1,19 +1,32 @@
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-            <div class="form-group">
-                <label for="name">
-                    Nom du Filme
-                </label>
-                <input type="text" id="filmName" class="form-control" name="filmName" ngModel required>
+<div class="col-sm-8 col-sm-offset-2">
+    <form [formGroup] = "filmForm" (ngSubmit)="onSubmitForm()">
+        <div class="form-group">
+            <label for="filmName"> Film </label>
+            <input type="text" class="form-control" id="filmName" formControlName="filmName" >
+            
+            <label for="realisator"> Realisateur </label>
+            <input type="text" class="form-control" id="realisator" formControlName="realisator" >
+            
+            <label for="release"> release </label>
+            <input type="text" class="form-control" id="release" formControlName="release" >
+            
+            <div formArrayName="actorList">
+                <h4>Liste d'acteur</h4>
+                <div class="form-group" *ngFor="let actor of getActorList().controls; let i = index">
+                    <input type="text" class="form-control" [formControlName]="i">
+                </div>
+                <button type="button" class="btn btn-success" (click)="onAddActorList()"> (+) </button>
             </div>
-            <div class="form-group">
-                <label for="actor">
-                    Nom de l'acteur
-                </label>
-                <input type="text" id="actorName" class="form-control" name="actorName" ngModel>
+            <div formArrayName="filmCategory">
+                <h4>Film Category</h4>
+                <div class="form-group" *ngFor="let category of getFilmCategory().controls; let i = index">
+                    <input type="text" class="form-control" [formControlName]="i">
+                </div>
+                <button type="button" class="btn btn-success" (click)="onAddFilmCategory()"> (+) </button>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Enregistrer</button>
-        </form>
-    </div>
+            <label for="srcImg"> release </label>
+            <input type="text" class="form-control" id="srcImg" formControlName="srcImg" >
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="filmForm.invalid"> soumettre </button>
+    </form>
 </div>

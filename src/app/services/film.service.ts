@@ -1,6 +1,7 @@
 import { Subject } from "rxjs";
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { Film } from "../models/film.model";
 
 @Injectable()
 export class FilmSevice{
@@ -14,7 +15,7 @@ export class FilmSevice{
   private films = [];
 
   emitFilmSubject(){
-    this.filmSubject.next(this.films.slice());
+    this.filmSubject.next(this.films);
   }
   
   getFilmById(id: number){
@@ -27,21 +28,9 @@ export class FilmSevice{
 
   }
 
-  addFilm(filmName : string, actorName : string){
-    const film = {
-      id : 0,
-      filmName : '',
-      actorList : '',
-      srcImg : ''
-    }
-
-    film.filmName = filmName;
-    film.actorList = actorName;
-    film.id = this.films[this.films.length-1].id + 1;
-
-    this.films.push(film);
-    this.emitFilmSubject(); 
-
+  addFilm(film : Film){
+      this.films.push(film);
+      this.emitFilmSubject();
   }
 
   saveFilmOnServer(){

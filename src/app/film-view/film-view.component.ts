@@ -13,9 +13,8 @@ export class FilmViewComponent implements OnInit {
   filmSubscription : Subscription;
   
   constructor (private filmsService : FilmSevice){
-    
-  }
 
+  }
 
   ngOnInit(){
     this.filmSubscription = this.filmsService.filmSubject.subscribe(

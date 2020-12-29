@@ -3,7 +3,9 @@
     <ul class="list-group">
       <app-film *ngFor="let film of films; let i = index" 
         [filmName]="film.filmName" 
-        [actorList]="film.actorList" 
+        [actorList]="film.actorList"
+        [category]="film.filmCategory"
+        [realisator]="film.realisator" 
         [srcImg]="film.srcImg"
         [indexOfFilm]="i"
         [id]="film.id">

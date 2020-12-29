@@ -10,7 +10,9 @@ export class FilmComponent implements OnInit {
   constructor() { }
 
   @Input() filmName :string;
+  @Input() realisator : string;
   @Input() actorList :string;
+  @Input() category : string;
   @Input() srcImg : string;
   @Input() indexOfFilm : number;
   @Input() id : number;

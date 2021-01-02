@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cinema-56d52": {
+      "hosting": {
+        "cinemaChoiser": [
+          "cinema-56d52"
+        ]
+      }
+    }
+  }
+}

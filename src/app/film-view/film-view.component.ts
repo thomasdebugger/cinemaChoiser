@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { Film } from '../models/film.model';
 import { FilmSevice } from '../services/film.service';
 

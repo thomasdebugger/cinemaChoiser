@@ -19,14 +19,21 @@ import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
 import { HttpClient, HttpClientModule} from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { RandomChoiserMovieComponent } from './random-choiser-movie/random-choiser-movie.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes : Routes = [
-  {path : 'films',canActivate: [AuthGuard], component: FilmViewComponent},
+  {path : 'films', component: FilmViewComponent},
+  {path : 'signUp', component: SignupComponent},
   {path : 'films/:id',canActivate: [AuthGuard], component: SingleFilmComponent},
+  {path : 'randomizer',canActivate: [AuthGuard], component: RandomChoiserMovieComponent },
   {path : 'users',canActivate: [AuthGuard], component: UserListComponent},
   {path : 'new-user',canActivate: [AuthGuard], component: NewUserComponent},
   {path : 'edit',canActivate: [AuthGuard], component: EditFilmComponent},
-  {path : 'auth', component: AuthComponent},
+  {path : 'signIn', component: SignInComponent},
   {path : 'not-found', component: FourOhFourComponent},
   {path : '**', redirectTo: '/not-found'},
 ];
@@ -42,6 +49,10 @@ const appRoutes : Routes = [
     SingleFilmComponent,
     UserListComponent,
     NewUserComponent,
+    RandomChoiserMovieComponent,
+    SignupComponent,
+    SignInComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

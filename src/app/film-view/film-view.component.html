@@ -2,7 +2,8 @@
     <h2>Films</h2>
     <ul class="list-group">
       <ng-container *ngIf="filmSubscription$|async as filmSubscription">
-        <input type="text" [(ngModel)]="term">
+        <input class="form-control" type="text" placeholder="film, categorie, acteurs..." aria-label="Search" [(ngModel)]="term">
+        <br/>
         <app-film *ngFor = "let film of filmSubscription | keyvalue | filter:term; let i = index" 
           [film]="film.value"
           [indexOfFilm]="i"

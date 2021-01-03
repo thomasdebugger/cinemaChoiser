@@ -1,9 +1,11 @@
+declare var require: any
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import firebase from '@firebase/app';
-require('firebase/auth');
+import firebase from 'firebase'
+require('firebase/auth')
 
 @Component({
   selector: 'app-signup',

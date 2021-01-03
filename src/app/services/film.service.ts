@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Film } from "../models/film.model";
 import { map } from 'rxjs/operators';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/analytics';
 
 @Injectable()
 export class FilmSevice{
@@ -34,4 +37,31 @@ export class FilmSevice{
   getFilmFromServer() : Observable<Film[]>{
     return this.httpClient.get<Film[]>('https://cinema-56d52-default-rtdb.firebaseio.com/films.json');
   }
+
+/*firebase-- intégration*/
+
+  saveFilm(film : Film){
+    firebase.database().ref('/films').set(film);
+  }
+  getFilms(){
+    firebase.database().ref('/films').on('value', (data)=>{
+      return data.val();
+    });
+  }
+
+  getFilmsByID(id : number){
+    return new Promise(
+      (resolve, reject)=>{
+        firebase.database().ref('/films/'+ id).once('value').then(
+          (data)=>{
+            resolve(data.val());
+          },
+          (error)=> {
+            reject(error);
+          }
+        )
+      }
+    );
+  }
+
 }
